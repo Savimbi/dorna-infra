@@ -50,6 +50,6 @@ resource "aws_s3_bucket_public_access_block" "my_bucket_block" {
 }
 
 output "website_url" {
-  value = "http://${aws_s3_bucket.frontend.bucket}-s3-website.${var.aws_region}.amazonaws.com"
+  value = data.aws_s3_bucket.existing.id != "" ? data.aws_s3_bucket.existing.id : "Bucket does not exist"
   description = "The URL of the S3 website" # Show only if bucket is created or exists
 }
